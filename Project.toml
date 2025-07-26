@@ -1,0 +1,7 @@
+name = "SATurn"
+uuid = "8db694c2-c867-583e-b337-7427a43e7a73"
+authors = ["Michael Tiemann <github@michaeltiemann.net>"]
+version = "0.1.0"
+
+[compat]
+julia = "1.10"

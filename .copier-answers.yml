@@ -1,0 +1,39 @@
+# Changes here will be overwritten by Copier
+AddAllcontributors: false
+AddCitationCFF: false
+AddCodeOfConduct: false
+AddCompatHelperCI: true
+AddContributionDocs: true
+AddCopierCI: false
+AddDependabot: true
+AddDocs: true
+AddDocsCI: true
+AddFormatterAndLinterConfigFiles: true
+AddGitHubPRTemplate: false
+AddGitHubTemplates: false
+AddLintCI: false
+AddLychee: true
+AddMacToCI: false
+AddPrecommit: false
+AddTagBotCI: false
+AddTestCI: true
+AddWinToCI: false
+Authors: Michael Tiemann <github@michaeltiemann.net>
+AutoIncludeTests: true
+CheckExplicitImports: false
+ConfigIndentation: 2
+JuliaIndentation: 4
+JuliaMinCIVersion: lts
+JuliaMinVersion: '1.10'
+License: MIT
+LicenseCopyrightHolders: Michael Tiemann
+MarkdownIndentation: 2
+PackageName: SATurn
+PackageOwner: mitiemann
+PackageUUID: 8db694c2-c867-583e-b337-7427a43e7a73
+RunJuliaNightlyOnCI: false
+StrategyConfirmIncluded: true
+StrategyLevel: 1
+StrategyReviewExcluded: true
+UseCirrusCI: false
+_src_path: /home/mtiemann/.julia/packages/BestieTemplate/jdG8v
