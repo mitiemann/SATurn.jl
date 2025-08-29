@@ -5,7 +5,9 @@ version = "0.1.0"
 
 [deps]
 DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+libpicosat_jll = "6b231c3b-13f8-5ced-86ae-8860c7f75d86"
 
 [compat]
 DataStructures = "0.19.0"
 julia = "1.10"
+libpicosat_jll = "965.0.1"
