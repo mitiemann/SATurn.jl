@@ -1,37 +1,41 @@
-using DataStructures
+abstract type AbstractLiteral end
 
 # Represent literals as integers (positive = true, negative = false)
-struct Literal
+struct SimpleLiteral <: AbstractLiteral
     var::Int
     sign::Bool  # true for positive, false for negative
-    
-    Literal(var, sign) = new(abs(var), sign)
+
+    SimpleLiteral(var, sign) = new(abs(var), sign)
 end
 
-Base.abs(l::Literal) = Literal(l.var, true)
-Base.:(-)(l::Literal) = Literal(l.var, !l.sign)
+SimpleLiteral(var) = SimpleLiteral(abs(var), var > 0)
+
+Base.abs(l::SimpleLiteral) = SimpleLiteral(l.var, true)
+Base.:(-)(l::SimpleLiteral) = SimpleLiteral(l.var, !l.sign)
+
+abstract type AbstractClause end
 
 # Clause represented as sorted array of literals
-struct Clause
-    literals::Vector{Literal}
+struct SimpleClause <: AbstractClause
+    literals::Vector{AbstractLiteral}
     
-    function Clause(lits::Vector{Literal})
+    function SimpleClause(lits::Vector{SimpleLiteral})
         # Sort literals by variable number for consistency
         sort!(lits, by = l -> l.var)
         new(lits)
     end
-    
-    function Clause(lits::Vararg{Literal})
-        Clause(collect(lits))
-    end
 end
 
+SimpleClause(lits::Vararg{SimpleLiteral}) = SimpleClause(collect(lits))
+
+abstract type AbstractCNF end
+
 # CNF formula - collection of clauses
-struct CNF
-    clauses::Vector{Clause}
+struct SimpleCNF <: AbstractCNF
+    clauses::Vector{AbstractClause}
     num_vars::Int
     
-    function CNF(clauses::Vector{Clause})
+    function SimpleCNF(clauses::Vector{SimpleClause})
         # Find maximum variable number
         max_var = 0
         for clause in clauses
@@ -41,14 +45,6 @@ struct CNF
         end
         new(clauses, max_var)
     end
-end
-
-# Abstract solver type
-abstract type SATSolver end
-
-# Simple backtracking solver (for testing)
-struct SimpleSolver <: SATSolver
-    timeout::Int
 end
 
 # Solution type
@@ -61,8 +57,16 @@ struct Solution
     end
 end
 
+# Abstract solver type
+abstract type SATSolver end
+
+# Simple backtracking solver (for testing)
+struct SimpleSolver <: SATSolver
+    timeout::Int
+end
+
 # Main solving interface
-function solve(solver::SATSolver, cnf::CNF)
+function solve(solver::SATSolver, cnf::AbstractCNF)
     # This will be implemented with your actual algorithm
     return Solution(false, cnf.num_vars)
 end

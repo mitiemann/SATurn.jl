@@ -1,5 +1,5 @@
 # Check if assignment satisfies a clause
-function satisfies(clause::Clause, assignment::Vector{Union{Nothing, Bool}})
+function satisfies(clause::AbstractClause, assignment::Vector{Union{Nothing, Bool}})
     # Check if any literal in clause is satisfied
     for lit in clause.literals
         var = lit.var
@@ -16,7 +16,7 @@ function satisfies(clause::Clause, assignment::Vector{Union{Nothing, Bool}})
 end
 
 # Check if assignment satisfies entire formula
-function satisfies_formula(cnf::CNF, assignment::Vector{Union{Nothing, Bool}})
+function satisfies_formula(cnf::AbstractCNF, assignment::Vector{Union{Nothing, Bool}})
     for clause in cnf.clauses
         if !satisfies(clause, assignment)
             return false
