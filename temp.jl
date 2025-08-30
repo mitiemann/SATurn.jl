@@ -5,27 +5,20 @@
 using Revise
 using SATurn
 
-methods(SATurn.SimpleLiteral)
-SATurn.SimpleLiteral(5)
-SimpleLiteral(-5)
-
-nums = "63 -86 -98 0"
-foo = map(x -> parse(Int, x), split(nums)) |> filter(x -> x != 0)
-
-file = "test/dimacs/cnf/tieshirt.cnf"
+file = "test/dimacs/cnf/eq2.cnf"
 cnf = parse_dimacs(file)
 
-# open(file) do f 
-#     clauses = SimpleClause[]
-#     for line in eachline(f)
-#         startswith(line, "c") && continue
-#         startswith(line, "p") && continue
-#         startswith(line, "%") && continue
+sol = Solution(cnf)
 
-#         literals = SimpleLiteral[]
-#         nums = map(x -> parse(Int, x), split(strip(line)))
-#         @show nums
-#         @show typeof(nums)
-#     end
-# end
+# c tie=1
+# c shirt=2
+# p cnf 2 3
+# 1 2 0
+# -1 2 0
+# -1 -2 0
+
+sol.assignment[1] = false
+sol.assignment[2] = true
+
+satisfies_formula(cnf, sol)
 

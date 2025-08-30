@@ -5,7 +5,7 @@
 # - print_dimacs <- CNF -> String
 # - write_dimacs <- String -> File
 function parse_dimacs(filename::String)
-    clauses = SimpleClause[]
+    clauses = Clause[]
     num_vars = 0
 
     open(filename, "r") do file
@@ -21,7 +21,7 @@ function parse_dimacs(filename::String)
             end
 
             # Parse clause
-            literals = SimpleLiteral[]
+            literals = Literal[]
             numbers = map(x -> parse(Int, x), split(strip(line)))
 
             for num in numbers
@@ -31,14 +31,14 @@ function parse_dimacs(filename::String)
 
                 var = abs(num)
                 sign = num > 0
-                push!(literals, SimpleLiteral(var, sign))
+                push!(literals, Literal(var, sign))
             end
 
             if !isempty(literals)
-                push!(clauses, SimpleClause(literals))
+                push!(clauses, Clause(literals))
             end
         end
     end
 
-    return SimpleCNF(clauses)
+    return CNF(clauses)
 end
